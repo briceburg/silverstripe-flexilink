@@ -1,0 +1,21 @@
+---
+name: flexilink
+---
+
+FlexiLink:
+  allowed_types:
+    - Page
+    - ExternalURL
+    - YouTubeID
+    
+FlexiLinkField:
+  field_types:
+    Page:
+      field: TreeDropdownField
+      description: Select a Page to Link To
+    ExternalURL: 
+      field: TextField
+      description: URL to link to (include http:// ...)
+    YouTubeID:
+      field: TextField
+      description: YouTube Video ID
