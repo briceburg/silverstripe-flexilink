@@ -65,14 +65,28 @@ object.
 
 ```
 
-* You may define link selection types and their related fields in [YAML Configuration](http://doc.silverstripe.org/framework/en/topics/configuration)
+* You may define link selection types and their related fields in [YAML Configuration](http://doc.silverstripe.org/framework/en/topics/configuration).
+Here's an example **/mysite/config/_config.yml**
 
 ```yaml
+---
+Name: mysite
+After:
+  - 'framework/*'
+  - 'cms/*'
+---
+# YAML configuration for SilverStripe
+# See http://doc.silverstripe.org/framework/en/topics/configuration
+# Caution: Indentation through two spaces, not tabs
+SSViewer:
+  theme: 'site'
+  
 FlexiLink:
   allowed_types:
     - Page
     - ExternalURL
     - YouTubeID
+    - Google
     
 FlexiLinkField:
   field_types:
@@ -85,6 +99,12 @@ FlexiLinkField:
     YouTubeID:
       field: TextField
       description: YouTube Video ID
+    Google:
+      field: TextField
+      description: TestTest
 ```
+
+Whenever making YML configuration changes, be sure to ?flush=all to register 
+them in the manifest.
 
 
