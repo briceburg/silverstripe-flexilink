@@ -81,30 +81,22 @@ After:
 SSViewer:
   theme: 'site'
   
-FlexiLink:
+FlexiLinkField:
   allowed_types:
     - Page
-    - ExternalURL
-    - YouTubeID
     - Google
     
-FlexiLinkField:
   field_types:
-    Page:
-      field: TreeDropdownField
-      description: Select a Page to Link To
-    ExternalURL: 
-      field: TextField
-      description: URL to link to (include http:// ...)
-    YouTubeID:
-      field: TextField
-      description: YouTube Video ID
     Google:
       field: TextField
       description: TestTest
 ```
 
-Whenever making YML configuration changes, be sure to ?flush=all to register 
-them in the manifest.
+This example adds a custom 'Google' field type, and limits the dropdown
+selection to 'Page' and 'Google' (hides the built-in YouTubeID and ExternalURL).
+
+
+**Remember**, _?flush=all_ after YML configuration changes to register them in
+the manifest. 
 
 
