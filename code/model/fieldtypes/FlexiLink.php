@@ -130,10 +130,6 @@ class FlexiLink extends DBField implements CompositeDBField
      */
     public function setLinkType($type, $markChanged = true)
     {
-        if ($type && ! in_array($type, $this->stat('allowed_types'))) {
-            user_error($type . ' is not an allowed type', E_USER_ERROR);
-        }
-
         $this->link_type = (string) $type;
         if ($markChanged) {
             $this->isChanged = true;
