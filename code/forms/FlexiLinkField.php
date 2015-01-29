@@ -13,18 +13,20 @@ class FlexiLinkField extends FormField {
         'tree'
     );
 
-
     protected $composite_fields = array();
 
     public function __construct($name, $title = null, $value = null, $form = null) {
 
-        $allowed_types = Config::inst()->get('FlexiLink', 'allowed_types');
+        $allowed_types = $this->stat('allowed_types');
+        $field_types = $this->stat('field_types');
+
+        if(empty($allowed_types)) {
+            $allowed_types = array_keys($field_types);
+        }
+
         $field = new DropdownField("{$name}[Type]", '', array_combine($allowed_types, $allowed_types));
         $field->setEmptyString('Please choose the Link Type');
-
         $this->composite_fields['Type'] = $field;
-
-        $field_types = $this->stat('field_types');
 
         foreach($allowed_types as $type) {
 

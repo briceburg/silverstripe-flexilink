@@ -2,13 +2,13 @@
 name: flexilink
 ---
 
-FlexiLink:
-  allowed_types:
-    - Page
-    - ExternalURL
-    - YouTubeID
-    
 FlexiLinkField:
+
+  # field types to allow in the dropdown selection
+  # leave empty to allow all defined types 
+  allowed_types:
+
+  # field type definitions
   field_types:
     Page:
       field: TreeDropdownField
