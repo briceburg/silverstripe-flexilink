@@ -85,10 +85,11 @@ class FlexiLink extends DBField implements CompositeDBField
     public function requireField()
     {
         $fields = $this->compositeDatabaseFields();
-        if ($fields)
+        if ($fields) {
             foreach ($fields as $name => $type) {
                 DB::requireField($this->tableName, $this->name . $name, $type);
             }
+        }
     }
 
     /**
@@ -162,7 +163,6 @@ class FlexiLink extends DBField implements CompositeDBField
     public function URL()
     {
         if ($value = $this->getLinkValue()) {
-
             switch ($this->getLinkType()) {
                 case 'Page':
                     if ($page = DataObject::get_by_id('SiteTree', (int) $value)) {
