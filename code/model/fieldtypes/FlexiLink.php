@@ -37,26 +37,32 @@ class FlexiLink extends DBField implements CompositeDBField
         if ($value instanceof FlexiLink) {
             $this->setLinkType($value->getLinkType(), $markChanged);
             $this->setLinkValue($value->getLinkValue(), $markChanged);
-        } elseif ($record && isset($record[$this->name . 'Type'])) {
-            if ($record[$this->name . 'Type']) {
-                $this->setLinkType($record[$this->name . 'Type'], $markChanged);
+        } else {
+            if (is_object($record)) {
+                /** @var DataObject $record */
+                $record = $record->toMap();
+            }
+            if ($record && isset($record[$this->name . 'Type'])) {
+                if ($record[$this->name . 'Type']) {
+                    $this->setLinkType($record[$this->name . 'Type'], $markChanged);
 
-                if (isset($record[$this->name . 'Value']) && $record[$this->name . 'Value']) {
-                    $this->setLinkValue($record[$this->name . 'Value'], $markChanged);
+                    if (isset($record[$this->name . 'Value']) && $record[$this->name . 'Value']) {
+                        $this->setLinkValue($record[$this->name . 'Value'], $markChanged);
+                    }
+                } else {
+                    $this->setLinkType($this->nullValue(), $markChanged);
+                    $this->setLinkValue($this->nullValue(), $markChanged);
+                }
+            } elseif (is_array($value)) {
+                if (array_key_exists('Type', $value)) {
+                    $this->setLinkType($value['Type'], $markChanged);
+                }
+                if (array_key_exists('Value', $value)) {
+                    $this->setLinkType($value['Value'], $markChanged);
                 }
             } else {
-                $this->setLinkType($this->nullValue(), $markChanged);
-                $this->setLinkValue($this->nullValue(), $markChanged);
+                //user_error('Invalid value in FlexiLink->setValue()', E_USER_ERROR);
             }
-        } elseif (is_array($value)) {
-            if (array_key_exists('Type', $value)) {
-                $this->setLinkType($value['Type'], $markChanged);
-            }
-            if (array_key_exists('Value', $value)) {
-                $this->setLinkType($value['Value'], $markChanged);
-            }
-        } else {
-            //user_error('Invalid value in FlexiLink->setValue()', E_USER_ERROR);
         }
     }
 
